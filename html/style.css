@@ -1,0 +1,176 @@
+body {
+  background: gray;
+  color: white;
+  --var-color: rgb(0, 238, 255);
+}
+
+img{
+width: 60px;
+}
+
+img:hover {
+  cursor: pointer;
+}
+
+.margem-a,
+.margem-b,
+.canoa {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #f7f2da;
+  color: black;
+  margin: 10px;
+  height: 400px;
+  
+}
+
+h4 {
+  color: gray;
+  margin: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+span {
+  
+  margin-bottom: 20px;
+  text-align: center;
+
+}
+
+.titulo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+button {
+  
+  width: 150px;
+  border: 2px solid black;
+  background-color: gray;
+  cursor: pointer;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: black;
+  border: 2px solid black;
+  transition: 0.5s ease;
+  
+  color: white;
+}
+
+.options {
+  display: flex;
+  justify-content: space-around;
+}
+
+.reiniciar {
+  color: white;
+  border: 2px solid white;
+}
+
+.fora {
+  width: 300px;
+  color: white;
+  border: 2px solid white;
+}
+
+.fora:hover {
+  background-color: black;
+  transition: 0.5s;
+}
+
+.content{
+  
+  width: 173.5px;
+  height: 200px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.content-1 {
+  width: 173.5px;
+  height: 109.14px;
+  text-align: center;
+}
+
+.opacity {
+  opacity: 50%;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.espaco {
+ 
+  height: 109.14px;
+  text-align: center;
+}
+
+
+.luz {
+  font-size: 2rem;
+  color: var(--var-color);
+  position: relative;
+  font-weight: bold;
+  
+}
+
+.luz::before {
+  position: absolute;
+  content: attr(data-text);
+  text-shadow: 0px 0px 20px var(--var-color);
+  filter: blur(10px) brightness(0);
+  animation: flicker 6s linear forwards infinite;
+  animation-delay: 1s;
+
+}
+
+
+@keyframes flicker {
+
+  0% {
+    filter: blur(5px) brightness(0);
+  }
+
+  2% {
+    filter: blur(5px) brightness(1);
+  }
+  4% {
+    filter: blur(5px) brightness(0);
+  }
+
+  7% {
+    filter: blur(5px) brightness(1);
+  }
+
+  8% {
+    filter: blur(5px) brightness(0);
+  }
+
+  9% {
+    filter: blur(5px) brightness(1);
+  }
+
+  10% {
+    filter: blur(5px) brightness(0);
+  }
+
+  20% {
+    filter: blur(20px) brightness(1);
+  }
+ 
+}

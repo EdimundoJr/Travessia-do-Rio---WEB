@@ -1,3 +1,59 @@
+function timer() {
+    if ((millisecond += 10) == 1000) {
+      millisecond = 0;
+      second++;
+    }
+    if (second == 60) {
+      second = 0;
+      minute++;
+    }
+    if (minute == 60) {
+      minute = 0;
+      hour++;
+    }
+    document.getElementById('hour').innerText = returnData(hour);
+    document.getElementById('minute').innerText = returnData(minute);
+    document.getElementById('second').innerText = returnData(second);
+    
+  }
+  
+  function returnData(input) {
+    return input > 10 ? input : `0${input}`
+  }
+  let hour = 0;
+  let minute = 0;
+  let second = 0;
+  let millisecond = 0;
+  
+  let cron;
+  
+  function start() {
+    pause();
+    cron = setInterval(() => { timer(); }, 10);
+  }
+  
+  function pause() {
+    clearInterval(cron);
+  }
+  
+  function reset() {
+    hour = 0;
+    minute = 0;
+    second = 0;
+    millisecond = 0;
+    document.getElementById('hour').innerText = '00';
+    document.getElementById('minute').innerText = '00';
+    document.getElementById('second').innerText = '00';
+    
+         
+  }
+  
+  window.addEventListener("load",start) 
+  resete = document.getElementById("resete")
+  resete.addEventListener("click", reset)
+
+
+
 let MargemA = ["Pai", "Mãe", "Policial", "Prisioneiro", "Filha1", "Filha2", "Filho1", "Filho2"]
 let Canoa = []
 let MargemB = []
@@ -11,6 +67,7 @@ function travessia() {
     let idImagem = this.getAttribute("id") // seleciona somente o id da imagem
     let travess = false; //libera o uso ou não do botão atravessar
     let LadoAtual = null // mostra o lado pra onde esta sendo clicado e levado as imagens
+    const elementos = document.getElementById(idImagem) // pegando o div com  o id da imagem
     
 
     // quando clicado em alguma iamgem da margem A, adiciona o lado atual que esta sendo executado a travessia
@@ -39,7 +96,9 @@ function travessia() {
             alert("Canoa cheia!")
             return false;
         }
-
+        /*Quando é clicado em algum passageiro na margem A, é adicionado uma classe "opacity", 
+         que foi atribuida no css propriedades para não ficar totalmente vissivel*/
+        elementos.classList.add('opacity')
         Canoa.push(idImagem)
     }
 
@@ -87,6 +146,7 @@ function travessia() {
 
             for (let i = 0; i < Canoa.length; i++) {
                 if (Canoa[i] == idImagem) {
+                    elementos.classList.remove('opacity')
                     imagem.parentNode.removeChild(imagem);
                     document.getElementById("canoa").appendChild(imagem)
 
@@ -108,8 +168,12 @@ function travessia() {
                     LadoAtual = 2
                     Canoa.splice(i, 1)
                     MargemA.push(idImagem)
+                    //remove a classe "opacity "quando retira a imagem da canoa
+                    elementos.classList.remove('opacity')
+
                     imagem.parentNode.removeChild(imagem);
                     document.getElementById(idImagem).appendChild(imagem)
+
                     console.log(MargemA + " - " + Canoa + " - " + MargemB)
                 }
             }
@@ -133,10 +197,11 @@ function travessia() {
 
 
         //adicionando as regras do jogo
-        if ((LadoAtual == 1 && travess == true)) {
+        if (LadoAtual == 1 && travess == true) {
 
-            if (!Canoa.includes("Pai") && !Canoa.includes("Mãe") && !Canoa.includes("Policial")) {
-                alert("Somente o Pai a Mãe e o Policial, podem conduzir o barco!")
+                  
+            if(!MargemA.includes("Pai") && !MargemA.includes("Mãe")){
+                alert("Filhos não podem  ficar sem a escolta dos Pais!")
                 return false;
             }
             if (!MargemA.includes("Pai") && MargemA.includes("Filho1") && MargemA.includes("Filho2")) {
@@ -162,11 +227,13 @@ function travessia() {
                         document.getElementById('lado').innerHTML = "Canoa (Lado B)"
                         Canoa.splice(i, 1)
                         MargemB.push(idImagem)
-                        imagem.parentNode.removeChild(imagem);
-                        document.getElementById("margem-b").appendChild(imagem)
+                        
                         console.log(MargemA + " - " + Canoa + " - " + MargemB)
                     }
+
                 }
+                        imagem.parentNode.removeChild(imagem);
+                        document.getElementById("margem-b").appendChild(imagem)
 
 
         }
@@ -192,7 +259,7 @@ function travessia() {
                     alert("Pai e Filhas Não podem ficar juntos, sem a companhia da Mãe!")
                     return false;
                 }
-                if (!MargemB.includes("Policial") && MargemB.includes("Prisioneiro")) {
+                if (MargemB.includes("Policial") && !MargemA.includes("Prisioneiro")) {
                     alert("Prisioneiro, Não pode ficar sem a escolta do policial!")
                     return false;
                 }else {
@@ -316,7 +383,6 @@ filho2.addEventListener("click", travessia)
 
 document.getElementById("Filho2").appendChild(filho2)
 
-
-
+window.addEventListener("load", )
 
 

@@ -5,29 +5,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+   
     <title>Travessia do Rio</title>
   </head>
   <body>
 
-    
-      <div class="titulo">
-        <h1 class="luz" data-text="Travessia do Rio">Travessia do Rio</h1>
-      
-        <h2>
+  <section id="instrucoes" class="efeito">
+    <div >
+      <p>As regras são as seguintes: </p>
+      <ul>
+      <li>
+        Somente o pai, a mãe e o policial sabem pilotar a canoa;
+      </li>
+      <li>A mãe não pode ficar sozinha com os filhos;</li>
+      <li>O pai não pode ficar sozinho com as filhas;</li>
+      <li>O prisioneiro não pode ficar sozinho com nenhum integrante da família;</li>
+      <li>O canoa só pode transportar 2 pessoas por vez;</li>
+      <li>Você pode ir e vir com as pessoas quantas vezes precisar;</li>
+      <li>Clique nas imagens dos bonequinhos para colocá-los dentro do canoa e depois no botão para embarcar.</li>
+          
+          <li>Para atravessar de uma margem para outra, clique no botão de atravessar</li>
+          <li>  Se precisar retirar os passageiros da canoa, clique em desembarcar.</li>
+      </ul>
+     <br>
+      <button  onclick="jogar()"> Jogar!</button>
+     
 
-          <span id="hour">00</span>:<span id="minute">00</span>:<span id="second">00</span>
-                                   
-          <button id="resete" type="button" name="reset">Reiniciar</button>
-             
-      </h2>
-      </div>
+    </div>
+  
+  </section>
+
+    <section id="game" class="hidden">
+      <h1 class="luz" data-text="Travessia do Rio">Travessia do Rio</h1>
+     
      
     
 
     <content class="box">
-      <div  class="margem-a" >
+      <div  class="margem-a">
        
-        <div >
+        <div id="a" class="content-1">
           <h4>Margem A</h4>
        
             <div class="content">
@@ -39,49 +56,100 @@
               <div id="Filha2"></div>
               <div id="Filho1"></div>
               <div id="Filho2"></div>
-              <button id="embarcarA">Embarcar</button>
+              
             </div>
-  
-          
+            
+            
         </div>
+        <div class="button-a"><button id="embarcarA">Embarcar</button></div>
       </div> 
       
-
-
     <div>
-
-      <div class="canoa">
+<div > <h3 >Selecionados:</h3>
+  <h5 id="tem">**</h5>
+</div>
+    
+<div class="canoa">
+        <div id="b" >
       <h4 id="lado" value="1">Canoa (Lado A)</h4>
     
-        <div class="content-1" id="canoa">    
+        <div  id="canoa">    
                 
         </div>
-        <div class="button">
-          <button id="atravessar">Atravessar</button>
-          <button id="desembarcar">Desembarcar</button>
-        </div>
-    </div>
- 
-    </div>
-        
-        
+      </div>
+      <div class="button-canoa">
+        <button   id="atravessar">Atravessar</button>
+        <button id="desembarcar">Desembarcar</button>
+      </div>
       
-
+    </div>
+    <div class="tempo">
+  
+      
+      <h2>
+        <img id="tempo" src="/src/time.png" alt="">
+        <span id="hour">00</span>:<span id="minute">00</span>:<span id="second">00</span>
+                                 
+        <button id="resete" type="button" name="reset">Reiniciar</button>
+           
+    </h2>
+    </div>
+    </div>
+      
       <div class="margem-b">
+        <div id="c" >
         <h4>Margem B</h4>
       
         <div class="content-1" id="margem-b">
-                    
+          
         </div>
-        <div class="button"><button id="embarcarB">Embarcar</button></div>
-        
       </div>
+        <div class="button"><button id="embarcarB">Embarcar</button></div>
+        </div>
     </content>
 
     <div class="options">
-      <button class="fora">Consulta de Históricos de Jogos</button>
-      <button class="fora">Tempo Médio de Conclusão de Jogos</button>
+      <button class="fora" id="mostrarHistórico">Consulta de Históricos de Jogos</button>
+      <button class="fora" id="tempoDejogo">Tempo Médio de Conclusão de Jogos</button>
     </div>
+  </section>
+  <!-- Elementos da tela de vitória   -->
+
+
+
+ 
+  
+<section id="win" class="hidden">
+
+  <div class="mensagem">
+    <p class="luz" data-text= "Meus Parabéns!">
+      Meus Parabéns! 
+   
+    </p>
+    <p class="luz" data-text= " Você Conseguio!">
+      Você Conseguio!
+    </p>
+    <div id="historico"></div>
+    <button id="novo-game">Jogue Novamente!</button>
+  </div> 
+  <div class="pyro" >
+    <div class="before"></div>
+    <div class="after"></div>
+    
+  </div>
     <script src="script.js"></script>
+
+
+    <div class="main">
+      <audio autoplay loop>
+        <source  src="/src/Main_teme.mp3">
+        
+      Your browser does not support the audio element.
+      </audio>
+    </div>
+      
+   
+</section>
+  
   </body>
 </html>

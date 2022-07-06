@@ -1,9 +1,19 @@
 body {
   background-image: url("/src/ilustracao-de-uma-floresta-com-um-rio-e-flor_50699-75.jpg");
-background-size: 100%;
-  --var-color: #006400 ;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  --var-color: #157715 ;
   font-size: 20px;
-overflow: hidden;
+  overflow: auto;
+
+  
+
+
+}
+#game,#win,#historico{
+  backdrop-filter: blur(10px);
+
 }
 ul{
 text-align: justify;
@@ -17,6 +27,7 @@ width: 60px;
 }
 
 .efeito{
+  transition: ease;
   border: 2px solid black;
   border-radius: 30px;
   background-color: white;
@@ -31,9 +42,17 @@ width: 60px;
   }
 
   to {
-    margin-bottom: 50%;
-    
+    margin-bottom: 50%; 
   }
+}
+#historico{
+  width: 100%;
+
+text-align: center;
+}
+#historico ul{
+margin-left: 25%;
+list-style: none;
 }
 #instrucoes{
 
@@ -43,6 +62,10 @@ text-align: center;
 
 margin-inline: auto;
 
+}
+textarea{
+width: 608.391;
+height: 456;
 }
 
 #instrucoes ul{
@@ -71,7 +94,7 @@ img:hover {
   margin: 10px;
   height: 400px;
   border-radius: 50px;
-
+  transition: ease;
 
 
 }

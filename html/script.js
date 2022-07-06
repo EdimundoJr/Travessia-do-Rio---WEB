@@ -4,9 +4,35 @@ function jogar(){
     game.classList.remove('hidden')
     start()
   }
-  
-  
-  
+
+let hist = document.getElementById("mostrarHistórico")
+hist.addEventListener("click", historicoMostrar)
+
+
+
+  function historicoMostrar(){
+
+    let lista = document.getElementById('his');
+    if(Historico.length == 3){
+      alert("Não há nenhum histórico!")
+      return 
+     }else{
+      game.classList.add('hidden')
+      historico.classList.remove('hidden')
+      for(var i = 0; i < Historico.length; i++){
+        let item = document.createElement('li');
+        item.appendChild(document.createTextNode(Historico[i]));
+        lista.appendChild(item);
+      }
+        
+    }
+  }
+function volta(){
+  game.classList.remove('hidden')
+  historico.classList.add('hidden')
+
+}
+     
   function timer() {
     if ((millisecond += 10) == 1000) {
       millisecond = 0;
@@ -40,9 +66,9 @@ function jogar(){
     pause();
     cron = setInterval(() => { timer(); }, 10);
   
-    Historico.push("Inicio do jogo: [Margem A:" + MargemA)
+    Historico.push("Margem A:" + MargemA)
     Historico.push("Canoa:" + Canoa)
-    Historico.push("Margem B:" + MargemB+"]")
+    Historico.push("Margem B:" + MargemB)
   }
   
   function pause() {
@@ -61,6 +87,7 @@ function jogar(){
     MargemA = ["Pai", "Mãe", "Policial", "Prisioneiro", "Filha1", "Filha2", "Filho1", "Filho2"]
     Canoa = []
     MargemB = []
+    Historico = []
     LadoAtual = null
     document.getElementById('a').innerHTML = `
     
@@ -89,7 +116,7 @@ function jogar(){
       <h4>Margem B</h4>
       <div class="content-1" id="margem-b"> 
       </div>` 
-  
+    document.getElementById("tem").innerHTML = "**"
       start()
   
   }
@@ -105,6 +132,7 @@ function jogar(){
   let MargemB = []
   let Historico = []
   let SalvarHistorico= []
+  let SalvarTempo = []
   
   let imagem; // pega as informações da imagem
   let idImagem; // seleciona somente o id da imagem//libera o uso ou não do botão atravessar
@@ -148,8 +176,7 @@ function jogar(){
         LadoAtual = null
         return false;
       }
-      /*Quando é clicado em algum passageiro na margem A, é adicionado uma classe "opacity", 
-       que foi atribuida no css propriedades para não ficar totalmente vissivel*/
+      
       
       Canoa.push(idImagem)
     }
@@ -167,7 +194,7 @@ function jogar(){
       //caso clicado na margem B é adicionado dentro da canoa o classe da imagem clicada
     }
   
-    Historico.push("Jogada: " +" Margem A:"+ MargemA +"/"+" Canoa: "+"/"+Canoa+" Margem B:"+MargemB)
+    
     if(Canoa.length > 0){
     document.getElementById("tem").innerHTML = Canoa
     }
@@ -189,15 +216,17 @@ function jogar(){
         let image = document.querySelector("." + pass)
         image.parentNode.removeChild(image);
         document.getElementById("canoa").appendChild(image);
-        document.getElementById('atravessar').disabled
+        
       
       })
-      
+      document.getElementById("atravessar").disabled= false
+      document.getElementById("desembarcar").disabled= false
     }
   
-    Historico.push("Embarcou: [Margem A:" + MargemA )
+    Historico.push("--------------------------------------Embarcou--------------------------------------") 
+    Historico.push("Margem A:"+ MargemA)
     Historico.push("Canoa:" + Canoa)
-    Historico.push("Margem B:" + MargemB+"]")
+    Historico.push("Margem B:" + MargemB)
     document.getElementById("tem").innerHTML = "**"
     
   
@@ -210,9 +239,8 @@ function jogar(){
     }
     if (regra1()) {
       alert("Canoa so pode ser conduzida pelo pai, mãe ou policial")
-      desembarcar();
-         
-      return;
+      desembarcar();   
+          return;
     }
     else if (regra2()) {
       alert("Mãe não pode permanecer na margem na companhia de um ou mais filhos sem a presença do pai")
@@ -253,7 +281,10 @@ function jogar(){
         Canoa = []
         
       }
-      Historico.push("Atravessou: " +" Margem A:"+ MargemA +"/"+" Canoa: "+"/"+Canoa+" Margem B:"+MargemB)
+      Historico.push("--------------------------Atravessou para outra Margem--------------------------") 
+      Historico.push("Margem A:"+ MargemA)
+      Historico.push("Canoa:" + Canoa)
+      Historico.push("Margem B:" + MargemB)
       document.getElementById("tem").innerHTML = "**"
     }
   
@@ -273,7 +304,8 @@ function jogar(){
         MargemB.includes("Prisioneiro") && !MargemB.includes("Policial") && MargemB.length > 1 ? true : false
   
     }
-  
+    document.getElementById("atravessar").disabled= true
+    document.getElementById("desembarcar").disabled= true
   }
   
   function desembarcar() {
@@ -282,14 +314,17 @@ function jogar(){
       Canoa.map(pass => {
         MargemA.push(pass)
         let image = document.querySelector("." + pass)
-        image.classList.remove('opacity')
+        
         document.querySelector("#" + pass).appendChild(image)
       })
       LadoAtual = 2
       Canoa = []
        
-      Historico.push("Desembarcou: " +" Margem A:"+ MargemA +"/"+" Canoa: "+"/"+Canoa+" Margem B:"+MargemB)
-    } else if (LadoAtual == 2) {
+      Historico.push("------------------------------------Desembarcou------------------------------------")  
+      Historico.push("Margem A:"+ MargemA)
+    Historico.push("Canoa:" + Canoa)
+    Historico.push("Margem B:" + MargemB)
+    } else if (LadoAtual == 8) {
       Canoa.map(pass => {
         MargemB.push(pass)
         let image = document.querySelector("." + pass)
@@ -299,9 +334,14 @@ function jogar(){
       LadoAtual = 1
       Canoa = []
       
-      Historico.push("Desembarcou: " +" Margem A:"+ MargemA +"/"+" Canoa: "+"/"+Canoa+" Margem B:"+MargemB)
+      Historico.push("------------------------------------Desembarcou------------------------------------") 
+      Historico.push("Margem A"+ MargemA)
+      Historico.push("Canoa:" + Canoa)
+      Historico.push("Margem B:" + MargemB)
     }
-    
+    document.getElementById("tem").innerHTML = "**"
+    document.getElementById("atravessar").disabled= true
+    document.getElementById("desembarcar").disabled= true
   }
   
   function embarcarB() {
@@ -313,34 +353,44 @@ function jogar(){
         image.parentNode.removeChild(image);
         document.getElementById("canoa").appendChild(image);
       })
-   
+      Historico.push("--------------------------------------Embarcou--------------------------------------") 
+      Historico.push("Margem A:"+ MargemA)
+      Historico.push("Canoa:" + Canoa)
+      Historico.push("Margem B:" + MargemB)
+    document.getElementById("tem").innerHTML = "**"
+
+      document.getElementById("atravessar").disabled= false
+      document.getElementById("desembarcar").disabled= false
+
   }
   
-    let jogo = document.getElementById("win")
-     let  menssagem = document.getElementById("game")
+    let winner = document.getElementById("win")
+     let  game = document.getElementById("game")
   
     function win(){
-         if(MargemB.length == 8) {
+         if(MargemB.length == 2 ) {
       
-      jogo.classList.remove('hidden')
-      menssagem.classList.add('hidden')
+      winner.classList.remove('hidden')
+      game.classList.add('hidden')
       pause()
-      Historico.push("Tempo:"+hour+":"+minute+":"+second)
+      Historico.push("-------------------------------------Fim de jogo!------------------------------------")
+      Historico.push("Tempo de conclusão: "+hour+" Hora(s) "+minute+" Minuto(s) "+second+" Segundo(s)!")
+      SalvarTempo.push(hour+minute+second)
       document.getElementById("main").innerHTML = `
       <audio autoplay loop>
       <source  src="/src/victory.mp3">
       
     Your browser does not support the audio element.
     </audio>`
-     
+     console.log(Historico)
     }
    
   }
-  
+
   function novoJogo(){
   
-    jogo.classList.add('hidden')
-    menssagem.classList.remove('hidden')
+    winner.classList.add('hidden')
+    game.classList.remove('hidden')
     MargemA = ["Pai", "Mãe", "Policial", "Prisioneiro", "Filha1", "Filha2", "Filho1", "Filho2"]
     Canoa = []
     MargemB = []
@@ -351,7 +401,7 @@ function jogar(){
     
   Your browser does not support the audio element.
   </audio>`
-  
+  reset()
   }
   
   window.addEventListener("click", win)

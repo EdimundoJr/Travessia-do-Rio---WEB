@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-Br">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,7 +9,7 @@
     <title>Travessia do Rio</title>
   </head>
   <body>
-
+   
   <section id="instrucoes" class="efeito">
     <div >
       <p>As regras são as seguintes: </p>
@@ -74,12 +74,12 @@
       <h4 id="lado" value="1">Canoa (Lado A)</h4>
     
         <div  id="canoa">    
-                
+          
         </div>
       </div>
       <div class="button-canoa">
-        <button   id="atravessar">Atravessar</button>
-        <button id="desembarcar">Desembarcar</button>
+        <button  disabled id="atravessar">Atravessar</button>
+        <button  disabled id="desembarcar">Desembarcar</button>
       </div>
       
     </div>
@@ -113,15 +113,17 @@
       <button class="fora" id="tempoDejogo">Tempo Médio de Conclusão de Jogos</button>
     </div>
   </section>
-  <!-- Elementos da tela de vitória   -->
 
-
-
- 
   
+  <!-- Elementos da tela de vitória   --> 
 <section id="win" class="hidden">
 
   <div class="mensagem">
+    <div class="pyro" >
+      <div class="before"></div>
+      <div class="after"></div>
+      
+    </div>
     <p class="luz" data-text= "Meus Parabéns!">
       Meus Parabéns! 
    
@@ -129,18 +131,14 @@
     <p class="luz" data-text= " Você Conseguio!">
       Você Conseguio!
     </p>
-    <div id="historico"></div>
+   
     <button id="novo-game">Jogue Novamente!</button>
   </div> 
-  <div class="pyro" >
-    <div class="before"></div>
-    <div class="after"></div>
-    
-  </div>
+  
     <script src="script.js"></script>
 
 
-    <div class="main">
+    <div id="main">
       <audio autoplay loop>
         <source  src="/src/Main_teme.mp3">
         
@@ -150,6 +148,19 @@
       
    
 </section>
+  <section id="historico" class="hidden">
+    
+      <div class="blur">
+        <ul id="his">
+          <li>------------------------------------Inicio de jogo------------------------------------</li>
+        </ul>
+      </div>
+      
   
+
+
+    <button id="voltar" onclick="volta()">Voltar</button>
+
+  </section>
   </body>
 </html>

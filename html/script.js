@@ -623,7 +623,6 @@ function voltando(){
     historico.classList.add('hidden')
     jogos.classList.remove("hidden")
     volt.classList.remove("hidden")
-
   }
 
   function tempoMedio(){

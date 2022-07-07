@@ -5,34 +5,7 @@ function jogar(){
     start()
   }
 
-let hist = document.getElementById("mostrarHistórico")
-hist.addEventListener("click", historicoMostrar)
 
-
-
-  function historicoMostrar(){
-
-    let lista = document.getElementById('his');
-    if(Historico.length == 3){
-      alert("Não há nenhum histórico!")
-      return 
-     }else{
-      game.classList.add('hidden')
-      historico.classList.remove('hidden')
-      for(var i = 0; i < Historico.length; i++){
-        let item = document.createElement('li');
-        item.appendChild(document.createTextNode(Historico[i]));
-        lista.appendChild(item);
-      }
-        
-    }
-  }
-function volta(){
-  game.classList.remove('hidden')
-  historico.classList.add('hidden')
-
-}
-     
   function timer() {
     if ((millisecond += 10) == 1000) {
       millisecond = 0;
@@ -64,11 +37,14 @@ function volta(){
   
   function start() {
     pause();
+    
     cron = setInterval(() => { timer(); }, 10);
   
     Historico.push("Margem A:" + MargemA)
     Historico.push("Canoa:" + Canoa)
     Historico.push("Margem B:" + MargemB)
+    ladoa.style.pointerEvents = 'auto'
+    ladob.style.pointerEvents = 'none'
   }
   
   function pause() {
@@ -117,6 +93,12 @@ function volta(){
       <div class="content-1" id="margem-b"> 
       </div>` 
     document.getElementById("tem").innerHTML = "**"
+    document.getElementById("embarcarA").disabled= false
+    document.getElementById("embarcarB").disabled= true
+    ladoa.style.pointerEvents = 'auto'
+    ladob.style.pointerEvents = 'none'
+
+
       start()
   
   }
@@ -133,7 +115,10 @@ function volta(){
   let Historico = []
   let SalvarHistorico= []
   let SalvarTempo = []
+ 
   
+
+
   let imagem; // pega as informações da imagem
   let idImagem; // seleciona somente o id da imagem//libera o uso ou não do botão atravessar
   let LadoAtual;// mostra o lado pra onde esta sendo clicado e levado as imagens
@@ -173,7 +158,7 @@ function volta(){
       //caso clique mais de 2 vezes nas imagens, é acionado o alerta de canoa cheia, não contabilizando o ultimo click para canoa
       if (Canoa.length >= 2) {
         alert("Canoa cheia!")
-        LadoAtual = null
+        
         return false;
       }
       
@@ -185,7 +170,7 @@ function volta(){
       //caso clique mais de 2 vezes nas imagens, é acionado o alerta de canoa cheia, não contabilizando o ultimo click para canoa
       if (Canoa.length >= 2) {
         alert("Canoa cheia!")
-        LadoAtual = null
+       
         return false;
       }
       
@@ -201,7 +186,9 @@ function volta(){
    
     
   }
-  
+  let ladoa = document.getElementById("a")
+  let ladob = document.getElementById("c")
+
   function embarcarA() {
     //caso a canoa não possua 2 paageiros é disparado o alerta
     if (Canoa.length != 2) {
@@ -221,14 +208,23 @@ function volta(){
       })
       document.getElementById("atravessar").disabled= false
       document.getElementById("desembarcar").disabled= false
+      document.getElementById("embarcarA").disabled= true
+      
+
+
     }
   
     Historico.push("--------------------------------------Embarcou--------------------------------------") 
     Historico.push("Margem A:"+ MargemA)
     Historico.push("Canoa:" + Canoa)
     Historico.push("Margem B:" + MargemB)
+    Historico.push("---------------------"+hour+" Hora(s) "+minute+" Minuto(s) "+second+" Segundo(s)-------------------------")
+
     document.getElementById("tem").innerHTML = "**"
     
+    ladoa.style.pointerEvents = 'none'
+   
+
   
   }
   
@@ -264,10 +260,14 @@ function volta(){
           let image = document.querySelector("." + pass)
             
           document.querySelector("#margem-b").appendChild(image)
+          ladoa.style.pointerEvents = 'none'
+          ladob.style.pointerEvents = 'auto'
         })
         document.getElementById('lado').innerHTML = "Canoa (Lado B)"
         LadoAtual = 2
         Canoa = []
+        ladoa.style.pointerEvents = 'pointer'
+        document.getElementById("embarcarB").disabled= false
         
       } else if(LadoAtual == 2 ){
         Canoa.map(pass => {
@@ -275,17 +275,25 @@ function volta(){
           let image = document.querySelector("." + pass)
             
           document.querySelector("#" + pass).appendChild(image)
+          ladoa.style.pointerEvents = 'auto'
+          ladob.style.pointerEvents = 'none'
         })
         document.getElementById('lado').innerHTML = "Canoa (Lado A)"
         LadoAtual = 1
         Canoa = []
+      document.getElementById("embarcarA").disabled= false
+      document.getElementById("embarcarB").disabled= true
+
         
       }
       Historico.push("--------------------------Atravessou para outra Margem--------------------------") 
       Historico.push("Margem A:"+ MargemA)
       Historico.push("Canoa:" + Canoa)
       Historico.push("Margem B:" + MargemB)
+      Historico.push("-------------------"+hour+" Hora(s) "+minute+" Minuto(s) "+second+" Segundo(s)!----------------------")
+
       document.getElementById("tem").innerHTML = "**"
+      
     }
   
     function regra1() {
@@ -324,7 +332,11 @@ function volta(){
       Historico.push("Margem A:"+ MargemA)
     Historico.push("Canoa:" + Canoa)
     Historico.push("Margem B:" + MargemB)
-    } else if (LadoAtual == 8) {
+    Historico.push("-------------------"+hour+" Hora(s) "+minute+" Minuto(s) "+second+" Segundo(s)!----------------------")
+    ladoa.style.pointerEvents = 'auto'
+    ladob.style.pointerEvents = 'none'
+    document.getElementById("embarcarA").disabled= false
+    } else if (LadoAtual == 2) {
       Canoa.map(pass => {
         MargemB.push(pass)
         let image = document.querySelector("." + pass)
@@ -338,6 +350,11 @@ function volta(){
       Historico.push("Margem A"+ MargemA)
       Historico.push("Canoa:" + Canoa)
       Historico.push("Margem B:" + MargemB)
+    Historico.push("-------------------"+hour+" Hora(s) "+minute+" Minuto(s) "+second+" Segundo(s)!----------------------")
+    ladoa.style.pointerEvents = 'none'
+    ladob.style.pointerEvents = 'auto'
+    document.getElementById("embarcarB").disabled= false
+
     }
     document.getElementById("tem").innerHTML = "**"
     document.getElementById("atravessar").disabled= true
@@ -345,22 +362,32 @@ function volta(){
   }
   
   function embarcarB() {
-  
+    if(Canoa.length == 0){
+      alert("Selecione o(s) passageiros")
+    return false
+    }
+    
+    ladob.style.pointerEvents = 'none'
     // vai mostrar na tela as imagens adicionadas na canoa, retirar da margem b 
   
       Canoa.map(pass => {
         let image = document.querySelector("." + pass)
         image.parentNode.removeChild(image);
         document.getElementById("canoa").appendChild(image);
+     
       })
+
       Historico.push("--------------------------------------Embarcou--------------------------------------") 
       Historico.push("Margem A:"+ MargemA)
       Historico.push("Canoa:" + Canoa)
       Historico.push("Margem B:" + MargemB)
-    document.getElementById("tem").innerHTML = "**"
+      Historico.push("-------------------"+hour+" Hora(s) "+minute+" Minuto(s) "+second+" Segundo(s)!----------------------")
+
+     document.getElementById("tem").innerHTML = "**"
 
       document.getElementById("atravessar").disabled= false
       document.getElementById("desembarcar").disabled= false
+     
 
   }
   
@@ -369,39 +396,59 @@ function volta(){
   
     function win(){
          if(MargemB.length == 2 ) {
-      
+          ladoa.style.pointerEvents = 'auto'
+          ladob.style.pointerEvents = 'none'
       winner.classList.remove('hidden')
       game.classList.add('hidden')
       pause()
       Historico.push("-------------------------------------Fim de jogo!------------------------------------")
       Historico.push("Tempo de conclusão: "+hour+" Hora(s) "+minute+" Minuto(s) "+second+" Segundo(s)!")
-      SalvarTempo.push(hour+minute+second)
+      SalvarTempo.push(hour+minute+second).value
       document.getElementById("main").innerHTML = `
       <audio autoplay loop>
       <source  src="/src/victory.mp3">
       
     Your browser does not support the audio element.
     </audio>`
-     console.log(Historico)
+        
+            
+        
+
     }
-   
+    SalvarHistorico.push(Historico)
   }
 
   function novoJogo(){
-  
+    historicoMostrarDetalhesFinal()
+    table()
     winner.classList.add('hidden')
     game.classList.remove('hidden')
+    jogadas.classList.add('hidden')
     MargemA = ["Pai", "Mãe", "Policial", "Prisioneiro", "Filha1", "Filha2", "Filho1", "Filho2"]
     Canoa = []
     MargemB = []
-    SalvarHistorico.push(Historico)
+    Historico = []
     document.getElementById("main").innerHTML = `
     <audio autoplay  loop>
     <source  src="./src/Main_teme.mp3">
     
   Your browser does not support the audio element.
   </audio>`
+
+    document.getElementById("jogadas").innerHTML =`<div class="blur" id="dentro" >
+    <ul id="his">
+      <li>------------------------------------Inicio de jogo------------------------------------</li>
+    </ul>
+    
+
+
+</div>`
+
+
   reset()
+  document.getElementById("historico-jogadas").classList.remove('hidden')
+
+
   }
   
   window.addEventListener("click", win)
@@ -478,7 +525,117 @@ function volta(){
   
   document.getElementById("Filho2").appendChild(filho2)
   }
+
+let hist1 = document.getElementById("mostrarHistórico")
+hist1.addEventListener("click", historicoMostrar)
+
+function historicoMostrar(){
   
+    game.classList.add('hidden')
+    jogadas.classList.add('hidden')
+    historico.classList.remove('hidden')
+    
+}
+
+
+function historicoMostrarDetalhes(){
+  
+  let lista = document.getElementById('his')
+  if(Historico.length == 0){
+    alert("Não há nenhum histórico!")
+    return 
+   }else{
+    pause();
+    historico.classList.add('hidden')
+    jogadas.classList.remove('hidden')
+    for(var i = 0; i < Historico.length; i++){
+      let item = document.createElement('li')
+      item.appendChild(document.createTextNode(Historico[i]))
+      lista.appendChild(item)
+    }
+    document.getElementById("historico-jogadas").classList.add('hidden')
+  }
+
+
+}
+
+function voltando(){
+  game.classList.remove('hidden')
+  historico.classList.add('hidden')
+  
+  
+
+}
+
   window.addEventListener("load", creat)
+ 
+
   
-  
+  function table(){
+      let tr = document.createElement('tr')
+      let tr2 = document.createElement('td')
+      tr.innerHTML = "Jogador";
+
+    
+    for(var i = 0; i < SalvarHistorico.length; i++){
+      tr.setAttribute("id", i)
+      
+      tr2.innerHTML = `<button  id="teste" onclick="view()">Veja o histórico de jogadas</button>
+      `;
+      document.getElementById("customers").appendChild(tr)
+      document.getElementById(i).appendChild(tr2)
+        
+
+    }
+    
+  }
+
+  var volt = document.getElementById("voltaHist")
+  var jogos = document.getElementById("jogos")
+
+
+  function historicoMostrarDetalhesFinal(){
+
+    let jogo = document.getElementById("jogo")
+    for(var i = 0; i < Historico.length; i++){
+      let item = document.createElement('li')
+      item.appendChild(document.createTextNode(Historico[i]))
+      jogo.appendChild(item)
+
+      
+    }
+   
+ 
+  }
+
+  function volta(){
+    var volt = document.getElementById("voltaHist")
+    var jogos = document.getElementById("jogos")
+  historico.classList.remove('hidden')
+  jogos.classList.add("hidden")
+  volt.classList.add("hidden")
+}
+ 
+
+  function view(){
+    var volt = document.getElementById("voltaHist")
+    var jogos = document.getElementById("jogos")
+    historico.classList.add('hidden')
+    jogos.classList.remove("hidden")
+    volt.classList.remove("hidden")
+
+  }
+
+  function tempoMedio(){
+    if(SalvarTempo.length ==0){
+    alert("Não possui média!")
+    }
+    let sum = 0
+    let media = 0
+    for (let i = 0; i < SalvarTempo.length; i++) {
+      sum += SalvarTempo[i] 
+      media =  sum / SalvarTempo.length
+      
+}
+alert("A media de jogos é de :" + media)
+}

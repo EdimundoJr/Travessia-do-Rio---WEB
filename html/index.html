@@ -48,7 +48,7 @@
           <h4>Margem A</h4>
        
             <div class="content">
-              <div id="Pai"></div>
+              <div  id="Pai"></div>
               <div id="Mãe"></div>
               <div id="Policial"></div>
               <div id="Prisioneiro"></div>
@@ -71,7 +71,7 @@
     
 <div class="canoa">
         <div id="b" >
-      <h4 id="lado" value="1">Canoa (Lado A)</h4>
+        <h4 id="lado" value="1">Canoa (Lado A)</h4>
     
         <div  id="canoa">    
           
@@ -90,9 +90,10 @@
         <img id="tempo" src="/src/time.png" alt="">
         <span id="hour">00</span>:<span id="minute">00</span>:<span id="second">00</span>
                                  
-        <button id="resete" type="button" name="reset">Reiniciar</button>
+        
            
     </h2>
+    <button id="resete" type="button" name="reset">Reiniciar</button>
     </div>
     </div>
       
@@ -104,13 +105,13 @@
           
         </div>
       </div>
-        <div class="button"><button id="embarcarB">Embarcar</button></div>
+        <div class="button"><button disabled id="embarcarB">Embarcar</button></div>
         </div>
     </content>
 
     <div class="options">
-      <button class="fora" id="mostrarHistórico">Consulta de Históricos de Jogos</button>
-      <button class="fora" id="tempoDejogo">Tempo Médio de Conclusão de Jogos</button>
+      <button class="fora" id="mostrarHistórico">Consulta do Históricos de jogos</button>
+      <button class="fora" id="tempoDejogo" onclick="tempoMedio()">Tempo Médio de Conclusão de Jogos</button>
     </div>
   </section>
 
@@ -129,10 +130,12 @@
    
     </p>
     <p class="luz" data-text= " Você Conseguio!">
-      Você Conseguio!
+      Você Conseguiu!
     </p>
-   
+   <div id="aqui"></div>
     <button id="novo-game">Jogue Novamente!</button>
+    <button  id="historico-jogadas" onclick="historicoMostrarDetalhes()">Veja o histórico de jogadas</button>
+
   </div> 
   
     <script src="script.js"></script>
@@ -150,17 +153,43 @@
 </section>
   <section id="historico" class="hidden">
     
-      <div class="blur">
-        <ul id="his">
-          <li>------------------------------------Inicio de jogo------------------------------------</li>
-        </ul>
-      </div>
+    <table id="customers">
+      <tr>
+        
+        <th>Tempo</th>
+        <th>Consultar</th>
+        
+       
+      </tr>
       
+      
+    </table>
+      
+    
   
 
 
-    <button id="voltar" onclick="volta()">Voltar</button>
+    <button id="voltar" onclick="voltando()">Voltar</button>
 
   </section>
+
+  <section id="jogadas" class="hidden">
+    <div class="blur" id="dentro" >
+      <ul id="his">
+        <li>------------------------------------Inicio de jogo------------------------------------</li>
+      </ul>
+      
+    
+
+    </div>
+  </section>
+  <section id="jogos" class="hidden">
+    <div class="blur"  >
+      <ul id="jogo">
+        <li>------------------------------------Inicio de jogo------------------------------------</li>
+      </ul>
+    </div>
+  </section>
+  <button  class="hidden" id="voltaHist" onclick="volta()">Voltar</button>
   </body>
 </html>

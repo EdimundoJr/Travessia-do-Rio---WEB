@@ -7,11 +7,40 @@ body {
   font-size: 20px;
   overflow: auto;
 
-  
-
-
 }
-#game,#win,#historico{
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
+  margin: auto;
+  
+}
+
+#customers td,
+#customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+  background-color: #ddd;
+}
+
+#customers th {
+  width: 100px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+ 
+
+  color: black;
+}
+#game,#win,#historico,#jogadas,#jogos{
   backdrop-filter: blur(10px);
 
 }
@@ -45,12 +74,13 @@ width: 60px;
     margin-bottom: 50%; 
   }
 }
-#historico{
+
+#historico,#jogadas{
   width: 100%;
 
 text-align: center;
 }
-#historico ul{
+#jogadas ul,#jogos ul{
 margin-left: 25%;
 list-style: none;
 }
@@ -74,6 +104,10 @@ text-align: left;
 }
 #instrucoes p{
   font-size: 30px;
+}
+
+#b{
+  pointer-events: none;
 }
 
 img:hover {
@@ -113,6 +147,7 @@ h1{
   text-align: center;
 }
 h3,h5,h2{
+margin-inline: auto;
 text-align: center;
 }
 
@@ -133,12 +168,7 @@ span {
 }
 
 .tempo {
-  
-  
-text-align: right;
-  padding-left: 100px;
-  padding-right: 10px;
-  
+text-align: center; 
 }
 
 .box {

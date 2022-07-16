@@ -395,7 +395,7 @@ function jogar(){
      let  game = document.getElementById("game")
   
     function win(){
-         if(MargemB.length == 2 ) {
+         if(MargemB.length == 8 ) {
           ladoa.style.pointerEvents = 'auto'
           ladob.style.pointerEvents = 'none'
       winner.classList.remove('hidden')
